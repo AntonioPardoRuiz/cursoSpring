@@ -54,6 +54,11 @@
                                 <input type="number" th:field="*{edad}" name="edad" id="edad" class="form-control" placeholder="Edad" autofocus
                                     required  th:errorclass="'form-control alert-danger'"/>
                             </div>
+                            <div class="mb-3">
+                                <label for="fechaconsulta" class="form-label">Fecha de la Consulta</label>
+                                <input type="date" th:field="*{fechaconsulta}" name="fechaconsulta" id="fechaconsulta" class="form-control" placeholder="fechaconsulta" autofocus
+                                    required  th:errorclass="'form-control alert-danger'"/>
+                            </div>
                             <br>
                             <h1></h1>
                             <div class="container">
@@ -91,7 +96,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr th:each="consulta : ${consultas}">
+                          <tr th:each="consulta : ${consultasList}">
                             <td th:text="${consulta.nombre}"></td>
                             <td th:text="${consulta.apellido}"></td>
                           </tr>

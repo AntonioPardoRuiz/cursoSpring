@@ -23,22 +23,35 @@ public class ConsultaController {
 
     @Autowired
     private  IConsultasDao iconsultasdao;
+    List<Consultas> consultasList;
+    
 
- 
     @RequestMapping(value="/consultas", method = RequestMethod.GET)
     public String consultas(Model model){
+        
+        consultasList = iconsultasdao.findAll();
         //Añadimos los datos del modelo, en este caso tendremos que cargar nuestro modelo de Usuarios
-		Consultas consultas = new Consultas();
-        //Recuperamos todas las consultas dadas de altas, para pasarlas al modelo, como consultas, lo añado dentro de un List de Consultas
-        model.addAttribute("consultas", consultas);
+        Consultas consultas = new Consultas();
 
+        if(consultasList!=null){
+            System.out.println("Tiene array");
+            //Si ya tenemos datos cargamos la primera vez
+            model.addAttribute("consultasList", consultasList);
+            model.addAttribute("consultas", consultas);
+        }else{
+            //En el caso de que no tengamos datos tenemos que mover los parametros al modelo si no dara error.
+
+            System.out.println(" No tiene array");
+            model.addAttribute("consultasList", consultasList);
+            model.addAttribute("consultas", consultas);
+        }
 		return "consultas";
     }
 
 	@RequestMapping(value="/consultas", method=RequestMethod.DELETE)
 	public String consultasDelete(@Validated Consultas consultas, Model model) {
         //Realizamos la baja.
-		iconsultasdao.delete(consultas.getId());
+	//	iconsultasdao.delete(consultas.getId());
 		model.addAttribute(consultas); 
 		return ("consultas");
 	}
@@ -47,17 +60,10 @@ public class ConsultaController {
 	@RequestMapping(value="/consultas", method=RequestMethod.POST)
 	public String altaConsultas(@Validated Consultas consultas, BindingResult result , Model model) {
         //Realizamos el alta.
-
-		iconsultasdao.save(consultas);
-		model.addAttribute(consultas);
-		return "consultas";
-	} 
-
-
-
-
-
-
-
-
+        //Añadimos la fecha del dia. en Java
+	    iconsultasdao.save(consultas);
+        //Añadimos en el objeto para recuperarlo al inicio del get. 
+        consultasList.add(consultas);
+		return "consultasList";
+	}
 }
