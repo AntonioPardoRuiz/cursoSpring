@@ -64,6 +64,6 @@ public class ConsultaController {
 	    iconsultasdao.save(consultas);
         //Añadimos en el objeto para recuperarlo al inicio del get. 
         consultasList.add(consultas);
-		return "consultasList";
+		return "consultas";
 	}
 }
