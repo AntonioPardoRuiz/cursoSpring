@@ -16,7 +16,7 @@
 <body>
     <!-- Incluimos la cabecera con Thymeleaf-->
     <header>
-        <div th:insert="fragments/cabecera::cabecera"></div>
+        <div th:insert="fragments/cabeceramenu::cabecera"></div>
     </header>
 
     <div class="container">
@@ -93,12 +93,14 @@
                           <tr>
                             <th scope="col">Nombre </th>
                             <th scope="col">Apellido </th>
+                            <th scope="col">Fecha Consulta</th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr th:each="consulta : ${consultasList}">
                             <td th:text="${consulta.nombre}"></td>
                             <td th:text="${consulta.apellido}"></td>
+                            <td th:text="${#dates.format(consulta.fechaconsulta, 'dd/MM/yyyy')}"></td>
                           </tr>
                         </tbody>
                     </table>

@@ -26,7 +26,7 @@ public class ConsultaController {
     List<Consultas> consultasList;
     
 
-    @RequestMapping(value="/consultas", method = RequestMethod.GET)
+    @GetMapping(value="/consultas")
     public String consultas(Model model){
         
         consultasList = iconsultasdao.findAll();

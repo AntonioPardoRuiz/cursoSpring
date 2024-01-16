@@ -49,10 +49,13 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
             .requestMatchers("/register/**").hasAnyRole("ADMIN","USER")
             .anyRequest().authenticated()
             .and()
+//            .loginPage("/login")
 //            .formLogin().permitAll()
             .formLogin().permitAll()
             .and()
-            .logout().permitAll();
+            .logout()
+            .logoutUrl("/logout") // URL del logout
+            .permitAll();
         } catch (Exception e) {
             e.printStackTrace();
         }

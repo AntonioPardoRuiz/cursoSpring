@@ -35,5 +35,11 @@ public class LoginController {
 		//para este proceso unicamente, vamos a setear los valores y darlos de alta en la tabla login. 
 		return ("menu");
 	}
+
+	//Definimos la ruta del logout.
+	@GetMapping("/logout")
+	public String logout(){
+		return "login";
+	}
     
 }
